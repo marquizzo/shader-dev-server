@@ -1,0 +1,22 @@
+{
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "compile": "webpack"
+  },
+  "name": "shader-dev-server",
+  "version": "0.1",
+  "description": "Hot-reloader for shader development, inspired by thebookofshaders.com and using Webpack",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "shader-loader": "^1.3.0",
+    "three": "^0.83.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
+  },
+  "devDependencies": {},
+  "author": "Marquizzo",
+  "license": "MIT"
+}

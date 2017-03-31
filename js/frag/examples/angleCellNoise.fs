@@ -199,6 +199,8 @@ vec2 cellular(vec3 P) {
 #endif
 }
 
+//  Function from Iñigo Quiles 
+//  https://www.shadertoy.com/view/MsS3Wc
 vec3 hsb2rgb( in vec3 c ){
     vec3 rgb = clamp(abs(mod(c.x * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
     rgb = rgb * rgb * (3.0 - 2.0 * rgb);
@@ -222,12 +224,8 @@ void main() {
 
   float angle = (atan(st.y - 0.5, st.x - 0.5) + PI) / (2.0 * PI);
   float dist = length(st.xy - vec2(0.5, 0.5)) * 2.0;
-  vec2 cell = cellular(vec3(angle * 10.0, dist * 10.0, u_time * 0.1));
-  vec3 color = hsb2rgb(vec3(dist, 0.5, cell.y));
-  
-  // Plot a line
-  // float pct = plot(st,y);
-  // color = (1.0 - pct) * color + pct * vec3(1.0, 0.7, 0.0);
+  vec2 cell = cellular(vec3(angle * 12.0, dist * 8.0, u_time * 0.1));
+  vec3 color = hsb2rgb(vec3(dist, cos(u_time) * 0.5 + 0.5, cell.y));
   
 	gl_FragColor = vec4(color,1.0);
 }

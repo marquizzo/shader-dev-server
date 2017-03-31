@@ -4,7 +4,7 @@ var path = require("path");
 module.exports = {
 	// Declare entry points, where you "enter" the script 
 	entry:{
-		script: "./js/index.js",
+		script: "./js/entry.js",
 	},
 
 	// Where to output the compiled JS

@@ -1,9 +1,8 @@
 import * as THREE from "three";
 
-// Relative path to shaders you'd like to use
-var fShader = require("./fs/simplexNoise.fs");
-// vertex shader should mostly remain untouched
-var vShader = require("./vs/vShader.vs");
+// Relative path to frag shader
+var fShader = require("./frag/default.fs");
+var vShader = require("./vert/vShader.vs");
 
 // THREE.js setup
 // Ported from THREE.js example in http://thebookofshaders.com/04/
@@ -21,11 +20,21 @@ function init() {
 
     var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
 
+    // Using uniform naming convention from thebookofshaders.com
     uniforms = {
         u_time: { value: 1.0 },
         u_resolution: { value: new THREE.Vector2() },
         u_mouse: { value: new THREE.Vector2() }
     };
+    
+    /*
+    // Using uniform naming convention from Shadertoy
+    uniforms = {
+        iGlobalTime: { value: 1.0 },
+        iResolution: { value: new THREE.Vector2() },
+        iMouse: { value: new THREE.Vector2() }
+    };
+    */
 
     var material = new THREE.ShaderMaterial( {
         uniforms: uniforms,
@@ -37,7 +46,6 @@ function init() {
     scene.add( mesh );
 
     renderer = new THREE.WebGLRenderer();
-    // renderer.setPixelRatio( 1 );
 
     document.body.appendChild( renderer.domElement );
 
@@ -48,14 +56,24 @@ function init() {
 }
 
 function onMouseMove(event){
-    uniforms.u_mouse.value.x = event.pageX
-    uniforms.u_mouse.value.y = event.pageY
+    // The Book of Shaders
+    uniforms.u_mouse.value.x = event.pageX;
+    uniforms.u_mouse.value.y = event.pageY;
+
+    // Shadertoy
+    // uniforms.iMouse.value.x = event.pageX;
+    // uniforms.iMouse.value.y = event.pageY;
 }
 
 function onWindowResize(event) {
     renderer.setSize( window.innerWidth, window.innerHeight );
+    // The Book of Shaders
     uniforms.u_resolution.value.x = renderer.domElement.width;
     uniforms.u_resolution.value.y = renderer.domElement.height;
+
+    // Shadertoy
+    // uniforms.iResolution.value.x = renderer.domElement.width;
+    // uniforms.iResolution.value.y = renderer.domElement.height;
 }
 
 function animate() {
@@ -64,6 +82,11 @@ function animate() {
 }
 
 function render() {
+    // The Book of Shaders
     uniforms.u_time.value += 0.05;
+
+    // Shadertoy
+    // uniforms.iGlobalTime.value += 0.05;
+
     renderer.render( scene, camera );
 }

@@ -155,7 +155,7 @@ vec3 curlNoise( vec3 p ){
 void main() {
 	// Coordinate
 	vec2 st = gl_FragCoord.xy / u_resolution;
-	vec2 m = (u_mouse / u_resolution - 0.5) * 0.01;
+	vec2 m = (u_mouse / u_resolution - 0.5) * 0.02;
 
     float r = snoise(vec3(
       (st.x - m.x) * 10.0,
